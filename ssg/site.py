@@ -31,6 +31,6 @@ class Site:
 
     @staticmethod
     def error(message):
-        sys.stdout.write("\x1b[1;31m{}\n".format(message))
+        sys.stderr.write("\x1b[1;31m{}\n".format(message))
 
 

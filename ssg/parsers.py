@@ -1,6 +1,6 @@
 import sys
 from docutils.core import publish_parts
-from markdown import Markdown
+from markdown import markdown
 from ssg.content import Content
 from pathlib import Path
 from typing import List
@@ -41,7 +41,7 @@ class MarkdownParser(Parser):
 
     def parse(self, path: Path, source: Path, dest: Path):
         content = Content.load(self.read(path))
-        html = Markdown(content.body)
+        html = markdown(content.body)
         self.write(path, dest, html)
         sys.stdout.write("\x1b[1;32m{} converted to HTML. Metadata: {}\n".format(path.name, content))
 
