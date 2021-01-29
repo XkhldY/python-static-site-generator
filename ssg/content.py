@@ -6,8 +6,8 @@ from collections.abc import Mapping
 
 
 class Content(Mapping):
-    def __getitem__(self, k):
-        return self.data[k]
+    def __getitem__(self, key):
+        return self.data[key]
 
     def __iter__(self):
         return self.data.__iter__()
@@ -22,12 +22,12 @@ class Content(Mapping):
     def __len__(self):
         return len(self.data)
 
-    __delimeter = "^(?:-|\+){3}\s*$"
-    __regex = re.compile(__delimeter, re.MULTILINE)
+    __delimiter = 'r"^(?:-|\\+){3}\\s*$"'
+    __regex = re.compile(__delimiter, re.MULTILINE)
 
     @classmethod
     def load(cls, string):
-        _, fm, content = cls._regex.split(string, 2)
+        _, fm, content = cls.__regex.split(string, 2)
         metadata = load(fm, Loader=FullLoader)
         return cls(metadata, content)
 
